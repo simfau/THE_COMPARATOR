@@ -7,3 +7,23 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+#
+Content.destroy_all
+User.destroy_all
+Comparison.destroy_all
+
+5.times do
+  Content.create!({format: rand(1), title: "lorem ipsum", description: "lorem ipsum dolor.."})
+end
+
+10.times do |i|
+  User.create!(
+    email: "simfaucher@outlook.com#{i.to_s}",
+    password: "123456"
+  )
+  i += 1
+end
+
+5.times do
+  Comparison.create!({content_a: Content.all.to_a.sample, content_b: Content.all.to_a.sample, user: User.all.to_a.sample, ai_result: "lorem ipsum dolor"})
+end
