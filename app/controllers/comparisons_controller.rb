@@ -6,4 +6,8 @@ def delete
   @comparison.destroy
 end
 
+def new
+  @comparison = Comparison.new
+end
+
 end
