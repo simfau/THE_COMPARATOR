@@ -6,7 +6,9 @@
   </li>
   <% comparisons.each do |comp| %>
     <li class="nav-item">
-      <%= link_to comp.ai_result, comparison_path(comp), class: "nav-link text-dark" %>
+      <%= link_to comparison_path(comp), class: "nav-link text-dark"%>
+      <strong><%= comp.generate_title%></strong>
+      <%= comp.ai_result%>
     </li>
   <% end %>
 </ul>
