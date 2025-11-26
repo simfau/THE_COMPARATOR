@@ -35,5 +35,4 @@ class ComparisonsController < ApplicationController
     return { content_a_id: params[:comparison][:content_a], content_b_id: params[:comparison][:content_b] }
   end
 
->>>>>>> bafcbb6f0edf8c832515473eaae4f360dfa305fc
 end
