@@ -1,0 +1,25 @@
+<div class="layout-wrapper">
+
+
+  <div class="row m-3 left-container">
+    <div class="col-5">
+      <div class="container px-4 py-4 bg-light border rounded">
+        <h3><%= @comparison.content_a.title %></h3>
+        <img width="500" src="https://images.complex.com/complex/image/upload/v1723863471/sanity-new/None-132962763.jpg" alt="Prince">
+
+      </div>
+
+      <div class="container px-4 py-4 bg-light border rounded">
+        <h3><%= @comparison.content_b.title %></h3>
+        <img width="500" src="https://cdn.shoplightspeed.com/shops/634895/files/22047022/1600x2048x2/prince-purple-rain-music-from-the-film.jpg" alt="Purple Rain">
+
+      </div>
+    </div>
+    <div class="col-7">
+      <div class="right-div">
+        <h1>Result</h1>
+        <p><%= @comparison.ai_result %></p>
+      </div>
+    </div>
+  </div>
+</div>
