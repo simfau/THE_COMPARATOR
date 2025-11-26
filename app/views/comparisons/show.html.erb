@@ -1,24 +1,64 @@
-<div class="layout-wrapper">
+<div class="layout-wrapper row">
 
+  <div class="col-5 m-3 left-container">
 
-  <div class="row m-3 left-container">
-    <div class="col-5">
-      <div class="container px-4 py-4 bg-light border rounded">
-        <h3><%= @comparison.content_a.title %></h3>
-        <img width="500" src="https://images.complex.com/complex/image/upload/v1723863471/sanity-new/None-132962763.jpg" alt="Prince">
+    <!-- کارت اول -->
+    <div class="container px-4 py-4 bg-light border rounded mb-4">
+      <h3><%= @comparison.content_a.title %></h3>
 
-      </div>
-
-      <div class="container px-4 py-4 bg-light border rounded">
-        <h3><%= @comparison.content_b.title %></h3>
-        <img width="500" src="https://cdn.shoplightspeed.com/shops/634895/files/22047022/1600x2048x2/prince-purple-rain-music-from-the-film.jpg" alt="Purple Rain">
-
+      <div class="album-wrapper">
+      <%= image_tag "None-132962763.jpg",
+          class: "img-fluid album-image",
+          alt: @comparison.content_b.title,
+          data: {bs_toggle: "modal", bs_target: "#imageModalA"} %>
       </div>
     </div>
-    <div class="col-7">
-      <div class="right-div">
-        <h1>Result</h1>
-        <p><%= @comparison.ai_result %></p>
+
+    <!-- کارت دوم -->
+    <div class="container px-4 py-4 bg-light border rounded">
+      <h3><%= @comparison.content_b.title %></h3>
+
+      <div class="album-wrapper">
+        <%= image_tag "Princepurplerain.jpg",
+          class: "album-image",
+          alt: @comparison.content_b.title ,
+          data: {bs_toggle: "modal", bs_target: "#imageModalB"} %>
+      </div>
+    </div>
+
+  </div> <!-- /left-container -->
+
+  <div class="col-6 right-div">
+    <h1>Results</h1>
+    <p><%= @comparison.ai_result %></p>
+  </div>
+
+</div> <!-- /layout-wrapper -->
+
+
+<!-- مودال عکس اول -->
+<div class="modal fade modal-dark" id="imageModalA" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <%= image_tag "None-132962763.jpg",
+          class: "modal-big-image",
+          alt: @comparison.content_b.title %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- مودال عکس دوم -->
+<div class="modal fade modal-dark" id="imageModalB" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <%= image_tag "Princepurplerain.jpg",
+          class: "modal-big-image",
+          alt: @comparison.content_b.title %>
       </div>
     </div>
   </div>
