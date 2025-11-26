@@ -3,6 +3,9 @@ class ComparisonsController < ApplicationController
   def new
     @comparison = Comparison.new
   end
+  def show
+    @comparison = Comparison.find(params[:id])
+  end
   def delete
     #should work but cant test yet.. -simon nov 25th
     @comparison = Comparison.find(params[:id])
