@@ -1,14 +1,18 @@
-<div class="row">
-  <div class="col">
-    <h3>Recent comparisons</h3>
-    <ul>
-      <% comparisons.each do |comparison| %>
-        <li>
-          <%= link_to comparison.ai_result, comparison_path(comparison) %>
-        </li>
-      <% end %>
-    </ul>
+<%= render "recent" %>
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 sidebar pt-3">
+      <%= render "recent", comparisons: @recent_comparisons %>
+    </nav>
+    <div class="col-md-10 my-4">
+      <%= render "recent" %>
+      <%= yield %>
+    </div>
   </div>
 </div>
 
 <%# <%= render "recent", comparisons: @recent_comparisons %>
+
+<%# <% comparisons.each do |comp| %>
+  <%= link_to comp.ai_result, comparison_path(comp) %>
+<% end %> %>
