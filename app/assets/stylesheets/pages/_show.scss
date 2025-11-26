@@ -2,3 +2,37 @@ img {
   width: 33vh;
   box-shadow: 30px 30px 30px red;
 }
+
+#result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.content-wrapper {
+  position: relative; /* This is essential! It becomes the anchor point. */
+  /* You may also want to set a fixed height for the wrapper if it doesn't span the page naturally. */
+  min-height: 80vh;
+}
+
+#button {
+  position: absolute; /* Takes the button out of the normal flow */
+  bottom: 20px;       /* Positions the button 20px up from the parent's bottom edge */
+  right: 20px;        /* Positions the button 20px in from the parent's right edge */
+  /* Override any conflicting layout classes */
+  margin: 0 !important;
+  text-align: right;
+  width: auto;
+}
+
+p {
+  font-size: 24px;
+}
+
+#button {
+  padding-bottom: 100px;
+}

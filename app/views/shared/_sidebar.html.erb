@@ -1,0 +1,12 @@
+<ul class="position-sticky sticky-top nav flex-column">
+  <li class="nav-item">
+    <%= link_to "#", class: "nav-link text-dark", data: { action: "click->toggle#call" } do %>
+      <i class="fa-regular fa-square-caret-left"></i>
+    <% end %>
+  </li>
+  <% comparisons.each do |comp| %>
+    <li class="nav-item">
+      <%= link_to comp.ai_result, comparison_path(comp), class: "nav-link text-dark" %>
+    </li>
+  <% end %>
+</ul>
