@@ -5,10 +5,10 @@
     <% end %>
   </li>
   <% comparisons.each do |comp| %>
-    <li class="nav-item">
-      <%= link_to comparison_path(comp), class: "nav-link text-dark"%>
+    <li class="nav-item mb-3"> <%= link_to comparison_path(comp), class: "nav-link text-dark" do %>
       <strong><%= comp.generate_title%></strong>
       <%= comp.ai_result%>
     </li>
+  <% end %>
   <% end %>
 </ul>
