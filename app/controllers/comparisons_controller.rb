@@ -27,9 +27,9 @@ class ComparisonsController < ApplicationController
     # raise
     @comparison = Comparison.new(comparison_params)
     @comparison.user = current_user
-    a = Content.find(comparison_params[:content_a_id]).title
-    b = Content.find(comparison_params[:content_b_id]).title
-    @comparison.ai_result = RubyLLM.chat.with_instructions(SYSTEM_PROMPT).ask("compare the following: #{a} and #{b}").content
+    a = Content.find(comparison_params[:content_a_id])
+    b = Content.find(comparison_params[:content_b_id])
+    @comparison.ai_result = RubyLLM.chat.with_instructions(SYSTEM_PROMPT).ask("compare the following: #{a.title}, #{a.year} and #{b.title}, #{b.year}").content
     if @comparison.save
       redirect_to comparison_path(@comparison)
     else
