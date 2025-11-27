@@ -1,4 +1,6 @@
 <% if user_signed_in? %>
+<% Tmdb::Api.key(ENV["TMDB_API_KEY"])
+RSpotify::authenticate(ENV["SPOTIFY_KEY"], ENV["SPOTIFY_SECRET"]) %>
 <div class="d-flex justify_content-start mb-3">
   <%= link_to "Log out", destroy_user_session_path,
     class: "btn btn-secondary btn-lg px-4 py-2 shadow text-decoration-none",
@@ -15,22 +17,11 @@
         <%= simple_form_for @comparison do |f| %>
 
           <div class="mb-3">
-            <%= f.input :content_a,
-              as: :select,
-              label: false,
-              collection: Content.all.where(format: :movie),
-              include_blank: "Choose first item",
-              input_html: { class: "form-select" }
-            %>
+            <%= f.input :content_a, as: :autocomplete, source: Tmdb::Movie.find('the godfather') %>
           </div>
 
           <div class="mb-3">
-            <%= f.input :content_b,
-              as: :select,
-              label: false,
-              collection: Content.all.where(format: :song),
-              include_blank: "Choose second item",
-              input_html: { class: "form-select" }
+            <%=  f.input :content_b, as: :autocomplete, source: RSpotify::Track.search('kiss')
             %>
           </div>
 
@@ -39,8 +30,6 @@
           </div>
 
         <% end %>
-
-
       </div>
     </div>
   </div>

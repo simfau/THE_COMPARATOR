@@ -363,6 +363,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
+    simple_form_autocomplete (1.1.0)
+      activesupport
+      simple_form
     snaky_hash (2.0.3)
       hashie (>= 0.1.0, < 6)
       version_gem (>= 1.1.8, < 3)
@@ -441,6 +444,7 @@ DEPENDENCIES
   sassc-rails
   selenium-webdriver
   simple_form!
+  simple_form_autocomplete
   sprockets-rails
   stimulus-rails
   themoviedb
