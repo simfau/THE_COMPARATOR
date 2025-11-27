@@ -24,8 +24,12 @@
     <div class="col-7">
       <div class="right-div">
         <h1>Result</h1>
-        <p><%= @comparison.ai_result %></p>
+        <% result = @comparison.ai_result.to_s %>
+        <%= raw(render_markdown(result)) %>
       </div>
     </div>
+  </div>
+  <div id="button" class="text-center mt-4">
+    <%= link_to "New Search", root_path, class: "btn btn-primary btn-lg" %>
   </div>
 </div>
