@@ -1,66 +1,29 @@
-<div class="layout-wrapper row">
-  <div class="col-5 m-3 left-container">
-
-    <!-- کارت اول -->
-    <div class="container px-4 py-4 bg-light border rounded mb-4">
-      <h3><%= @comparison.content_a.title %></h3>
-
-      <div class="album-wrapper">
-      <%= image_tag @comparison.content_a.image_url,
-          class: "img-fluid album-image",
-          alt: @comparison.content_a.title,
-          data: {bs_toggle: "modal", bs_target: "#imageModalA"} %>
-      </div>
-    </div>
-
-    <!-- کارت دوم -->
-    <div class="container px-4 py-4 bg-light border rounded">
-      <h3><%= @comparison.content_b.title %></h3>
-
-      <div class="album-wrapper">
-        <%= image_tag @comparison.content_b.image_url,
-          class: "album-image",
-          alt: @comparison.content_b.title ,
-          data: {bs_toggle: "modal", bs_target: "#imageModalB"} %>
-      </div>
-    </div>
-
-  </div> <!-- /left-container -->
-
-  <div class="col-6 right-div">
-    <h1>Results</h1>
-    <p><%= @comparison.ai_result %></p>
-  </div>
-
-</div> <!-- /layout-wrapper -->
+<div class="layout-wrapper">
 
 
-<!-- مودال عکس اول -->
-<div class="modal fade modal-dark" id="imageModalA" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-body">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="row m-3 left-container">
+    <div class="col-5">
+      <div class="container px-4 py-4 bg-light border rounded">
+        <h3><%= @comparison.content_a.title %></h3>
         <%= image_tag @comparison.content_a.image_url,
-          class: "modal-big-image",
-          alt: @comparison.content_a.title %>
+        alt: @comparison.content_a.title,
+        data: {bs_toggle: "modal", bs_target: "#imageModalB"}
+        %>
+      </div>
+
+      <div class="container px-4 py-4 bg-light border rounded">
+        <h3><%= @comparison.content_b.title %></h3>
+        <%= image_tag @comparison.content_b.image_url,
+        alt: @comparison.content_b.title,
+        data: {bs_toggle: "modal", bs_target: "#imageModalB"}
+        %>
+
       </div>
     </div>
-  </div>
-</div>
-
-<!-- مودال عکس دوم -->
-<div class="modal fade modal-dark" id="imageModalB" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-body">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <%= image_tag @comparison.content_b.image_url,
-          class: "modal-big-image",
-          alt: @comparison.content_b.title %>
-      </div>
-      <div id="button" class="text-center mt-4">
-        <%= link_to "New Search", root_path, class: "btn btn-primary btn-lg" %>
+    <div class="col-7">
+      <div class="right-div">
+        <h1>Result</h1>
+        <p><%= @comparison.ai_result %></p>
       </div>
     </div>
   </div>
