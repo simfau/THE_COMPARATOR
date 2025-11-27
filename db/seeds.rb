@@ -29,7 +29,7 @@ RSpotify::authenticate(ENV["SPOTIFY_KEY"], ENV["SPOTIFY_SECRET"])
   faker_song = Faker::Music::Prince.song
   song = RSpotify::Track.search(faker_song)[0]
   img = song.album.images[0]["url"]
-  Content.create!({format: :song, title: song.name, description: Faker::Lorem.sentence(word_count: 40), image_url: img})
+  Content.create!({format: :song,  title: song.name, description: Faker::Lorem.sentence(word_count: 40), image_url: img})
 end
 
 2.times do |i|
