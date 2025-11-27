@@ -6,7 +6,7 @@ class ComparisonsController < ApplicationController
   or echo each other in unexpected ways. Use poetic yet precise language, and always leave the
   reader with a fresh perspective or a thought-provoking connection. Focus on the essence of each work,
   not just surface details"
-  
+
   def new
     @comparison = Comparison.new
   end
@@ -28,7 +28,6 @@ class ComparisonsController < ApplicationController
     if @comparison.save
       redirect_to comparison_path(@comparison)
     else
-      raise
       render 'new', status: :unprocessable_entity
     end
   end
@@ -36,7 +35,6 @@ class ComparisonsController < ApplicationController
   private
 
   def comparison_params
-    # we might need to change the specifics to fit sepidehs 'new' form outputs
     params.require(:comparison).permit([:comparison, :user_id])
     return { content_a_id: params[:comparison][:content_a], content_b_id: params[:comparison][:content_b] }
   end
