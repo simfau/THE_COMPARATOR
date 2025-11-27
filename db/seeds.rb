@@ -8,13 +8,19 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 require 'faker'
+require 'themoviedb'
 
 Content.destroy_all
 User.destroy_all
 Comparison.destroy_all
+Tmdb::Api.key(ENV["TMDB_API_KEY"])
 
 5.times do
-  Content.create!({format: :movie, title: Faker::Movie.title, description: Faker::Lorem.sentence(word_count: 20)})
+
+  faker_movie = Faker::Movie.title
+  movie = Tmdb::Movie.find(faker_movie)[0]
+ img  = "https://image.tmdb.org/t/p#{movie.poster_path}"
+  Content.create!({format: :movie, title: movie.title, description: movie.overview, image_url: img})
 end
 
 5.times do

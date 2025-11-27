@@ -115,6 +115,7 @@ GEM
     concurrent-ruby (1.3.5)
     connection_pool (2.5.5)
     crass (1.0.6)
+    csv (3.3.5)
     date (3.5.0)
     debug (1.11.0)
       irb (~> 1.10)
@@ -158,6 +159,10 @@ GEM
       sassc (~> 2.0)
     globalid (1.3.0)
       activesupport (>= 6.1)
+    httparty (0.23.2)
+      csv
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.2.2)
@@ -188,6 +193,8 @@ GEM
     mini_mime (1.1.5)
     minitest (5.26.2)
     msgpack (1.8.0)
+    multi_xml (0.7.2)
+      bigdecimal (~> 3.1)
     multipart-post (2.4.1)
     mutex_m (0.3.0)
     net-http (0.8.0)
@@ -323,6 +330,8 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.8)
+    themoviedb (1.0.2)
+      httparty
     thor (1.4.0)
     tilt (2.6.1)
     timeout (0.4.4)
@@ -382,6 +391,7 @@ DEPENDENCIES
   simple_form!
   sprockets-rails
   stimulus-rails
+  themoviedb
   turbo-rails
   tzinfo-data
   web-console
