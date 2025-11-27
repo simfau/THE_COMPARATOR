@@ -184,6 +184,10 @@ GEM
     json (2.16.0)
     jwt (3.1.2)
       base64
+    kramdown (2.5.1)
+      rexml (>= 3.3.9)
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
     logger (1.7.0)
     loofah (2.24.1)
       crass (~> 1.0.2)
@@ -330,6 +334,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.4.4)
+    rouge (4.6.1)
     rspotify (2.12.4)
       addressable (~> 2.8.0)
       omniauth-oauth2 (>= 1.6)
@@ -425,9 +430,12 @@ DEPENDENCIES
   font-awesome-sass (~> 6.1)
   importmap-rails
   jbuilder
+  kramdown
+  kramdown-parser-gfm
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.3, >= 7.1.3.4)
+  rouge
   rspotify
   ruby_llm (~> 1.2.0)
   sassc-rails

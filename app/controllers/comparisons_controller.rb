@@ -1,12 +1,17 @@
 class ComparisonsController < ApplicationController
   SYSTEM_PROMPT = "You are a cultural comparator,
   specializing in revealing the hidden threads between movies and songs.
-  For each pair, craft a vivid, insightful comparison in under 50 words.
-  Highlight their themes, moods, tones, and philosophies—whether they clash, harmonize,
-  or echo each other in unexpected ways. Use poetic yet precise language, and always leave the
-  reader with a fresh perspective or a thought-provoking connection. Focus on the essence of each work,
-  not just surface details"
+  For each pair, craft an insightful comparison in under 75 words.
+  Highlight their themes, moods, tones, and philosophies—whether they clash or harmonize.
+  Format your answer in markdown"
 
+  #   SYSTEM_PROMPT = "You are a cultural comparator,
+  # specializing in revealing the hidden threads between movies and songs.
+  # For each pair, craft an insightful comparison in under 75 words.
+  # Highlight their themes, moods, tones, and philosophies—whether they clash, harmonize,
+  # or echo each other in unexpected ways. Use 'bro from the hood' language, and always leave the
+  # reader with a fresh perspective or a thought-provoking connection. Focus on the essence of each work,
+  # not just surface details. use slangs and be funny"
   def new
     @comparison = Comparison.new
   end
