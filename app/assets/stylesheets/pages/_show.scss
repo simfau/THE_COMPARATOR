@@ -1,5 +1,6 @@
 
 
+
 #result {
   display: flex;
   flex-direction: column;
@@ -28,10 +29,12 @@
 
 p {
   font-size: 32px;
+  color: white;
 }
 
 h1 {
   font-size: 64px;
+  color: white;
 }
 
 #button {
@@ -99,4 +102,8 @@ img {
   height: 33vh;
   box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.3);
   // object-fit: contain;
+}
+
+body {
+  background-color: #141414;
 }
