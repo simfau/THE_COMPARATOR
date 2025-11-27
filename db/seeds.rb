@@ -20,7 +20,8 @@ Tmdb::Api.key(ENV["TMDB_API_KEY"])
   faker_movie = Faker::Movie.title
   movie = Tmdb::Movie.find(faker_movie)[0]
   img  = "https://image.tmdb.org/t/p/original#{movie.poster_path}"
-  Content.create!({format: :movie, title: movie.title, description: movie.overview, image_url: img})
+  released = Tmdb::Movie.find(faker_movie)[0].release_date.first(4)
+  Content.create!({format: :movie, title: movie.title, description: movie.overview, image_url: img, year: released})
 end
 
 RSpotify::authenticate(ENV["SPOTIFY_KEY"], ENV["SPOTIFY_SECRET"])
@@ -28,8 +29,10 @@ RSpotify::authenticate(ENV["SPOTIFY_KEY"], ENV["SPOTIFY_SECRET"])
 5.times do
   faker_song = Faker::Music::Prince.song
   song = RSpotify::Track.search(faker_song)[0]
+  artist = RSpotify::Track.search('kiss')[0].album.artists[0].name
   img = song.album.images[0]["url"]
-  Content.create!({format: :song,  title: song.name, description: Faker::Lorem.sentence(word_count: 40), image_url: img})
+  released = RSpotify::Track.search('kiss')[0].album.release_date.first(4)
+  Content.create!({format: :song,  title: song.name, description: Faker::Lorem.sentence(word_count: 40), image_url: img, creator: artist, year: released})
 end
 
 2.times do |i|
