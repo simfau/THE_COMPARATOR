@@ -6,9 +6,9 @@
       <h3><%= @comparison.content_a.title %></h3>
 
       <div class="album-wrapper">
-      <%= image_tag "None-132962763.jpg",
+      <%= image_tag @comparison.content_a.image_url,
           class: "img-fluid album-image",
-          alt: @comparison.content_b.title,
+          alt: @comparison.content_a.title,
           data: {bs_toggle: "modal", bs_target: "#imageModalA"} %>
       </div>
     </div>
@@ -18,7 +18,7 @@
       <h3><%= @comparison.content_b.title %></h3>
 
       <div class="album-wrapper">
-        <%= image_tag "Princepurplerain.jpg",
+        <%= image_tag @comparison.content_b.image_url,
           class: "album-image",
           alt: @comparison.content_b.title ,
           data: {bs_toggle: "modal", bs_target: "#imageModalB"} %>
@@ -41,9 +41,9 @@
     <div class="modal-content">
       <div class="modal-body">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <%= image_tag "None-132962763.jpg",
+        <%= image_tag @comparison.content_a.image_url,
           class: "modal-big-image",
-          alt: @comparison.content_b.title %>
+          alt: @comparison.content_a.title %>
       </div>
     </div>
   </div>
@@ -55,7 +55,7 @@
     <div class="modal-content">
       <div class="modal-body">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <%= image_tag "Princepurplerain.jpg",
+        <%= image_tag @comparison.content_b.image_url,
           class: "modal-big-image",
           alt: @comparison.content_b.title %>
       </div>
