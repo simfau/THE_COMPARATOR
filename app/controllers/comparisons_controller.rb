@@ -48,7 +48,7 @@ def create
 
   # Generate AI result
   begin
-    ai_prompt = "Compare the following: #{content_a.title} (#{content_a.year}) and #{content_b.title} (#{content_b.year})"
+    ai_prompt = "Compare the following: 1 movie :#{content_a.title} (#{content_a.year}) and #{content_b.title} (song, #{content_b.year}) by #{content_b.creator}"
     @comparison.ai_result = RubyLLM.chat.with_instructions(SYSTEM_PROMPT).ask(ai_prompt).content
   rescue => e
     Rails.logger.error "AI generation failed: #{e.message}"
