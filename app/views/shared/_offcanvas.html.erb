@@ -1,3 +1,4 @@
+
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header text-center">
     <h5 class="offcanvas-title m-3 fs-2" id="offcanvasExampleLabel">Recent results</h5>
@@ -14,4 +15,12 @@
       <% end %>
     </ul>
   </div>
+  <% if user_signed_in? %>
+<div class="d-flex justify-content-end m-3">
+  <%= link_to "Log out", destroy_user_session_path,
+    class: "btn btn-outline-secondary btn-lg px-4 py-2 shadow text-decoration-none",
+    data: {turbo_method: :delete} %>
+</div>
+
+<% end %>
 </div>
