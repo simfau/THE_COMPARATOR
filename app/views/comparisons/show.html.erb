@@ -9,7 +9,7 @@
 <div class="layout-wrapper">
   <div class="row m-3 left-container">
     <div class="col-4" data-controller="modal">
-      <div class="img-box container bg-light border mb-5">
+      <div class="img-box container mb-5">
 
         <h3><%= @comparison.content_a.title %></h3>
         <%= image_tag @comparison.content_a.image_url,
@@ -19,7 +19,7 @@
 
       </div>
 
-      <div class="img-box container bg-light border">
+      <div class="img-box container">
         <h3><%= @comparison.content_b.title %></h3>
         <%= image_tag @comparison.content_b.image_url,
         alt: @comparison.content_b.title,

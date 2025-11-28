@@ -1,7 +1,7 @@
 .img-box {
   border-radius: 10px;
-  // margin-bottom: 100px;
-  // padding-bottom: 10px;
+  background-color: #3d3d3d;
+  color: white;
   // // width: 50px;
 }
 
@@ -28,7 +28,7 @@
 .card {
   border-radius: 10px;
   color: #ccc;
-  background-color: #333333;
+  background-color: #3d3d3d;
 }
 
 #result {
@@ -143,4 +143,9 @@ body {
 
 h3 {
   text-align: center;
+  padding-top: 5px;
+}
+
+.new-container {
+  border-top: 100px;
 }
