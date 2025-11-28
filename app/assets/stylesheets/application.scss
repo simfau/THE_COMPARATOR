@@ -12,6 +12,7 @@
 @import "pages/index";
 @import "pages/show";
 @import "components/offcanvas";
+@import "pages/new";
 
 
 @import 'simple_form_autocomplete';
@@ -30,4 +31,12 @@
 #movie_query, #song_query {
  background-color: rgb(202, 202, 202);
  border-radius: 10px;
+}
+.card {
+  border-radius: 10px;
+  color: #ccc;
+  background-color: $tcgrey;
+}
+.offcanvas {
+  background-color: $tcwhite;
 }
