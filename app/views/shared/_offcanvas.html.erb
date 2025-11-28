@@ -1,0 +1,17 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header text-center">
+    <h5 class="offcanvas-title m-3 fs-2" id="offcanvasExampleLabel">Recent results</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="flex-column">
+      <% comparisons.each do |comp| %>
+        <li class="nav-item">
+          <%= link_to comparison_path(comp), class: "nav-link text-dark" do %>
+            <strong><%= comp.generate_title%></strong>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
