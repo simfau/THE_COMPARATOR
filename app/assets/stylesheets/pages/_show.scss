@@ -1,4 +1,14 @@
+#image-box {
+  border-radius: 1px;
+  margin-bottom: 100px;
+  padding-bottom: 10px;
+  width: 50px;
+}
 
+#sidebar {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
 
 #result {
   display: flex;
@@ -11,54 +21,56 @@
 }
 
 .content-wrapper {
-  position: relative; /* This is essential! It becomes the anchor point. */
-  /* You may also want to set a fixed height for the wrapper if it doesn't span the page naturally. */
+  position: relative;
   min-height: 80vh;
 }
 
 #button {
-  position: absolute; /* Takes the button out of the normal flow */
-  bottom: 20px;       /* Positions the button 20px up from the parent's bottom edge */
-  right: 20px;        /* Positions the button 20px in from the parent's right edge */
-  /* Override any conflicting layout classes */
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
   margin: 0 !important;
   text-align: right;
   width: auto;
 }
 
 p {
-  font-size: 32px;
+  font-size: 24px;
+  ;
+  color: white;
 }
 
 h1 {
   font-size: 64px;
+  color: white;
 }
 
 #button {
   padding-bottom: 100px;
 }
 
-/* Class Stimulus uses to hide the element */
+
 .hidden {
   display: none !important;
 }
 
-/* Make the thumbnail look clickable */
+
 .clickable-thumbnail {
   cursor: pointer;
 }
 
-/* Modal Styling (Same as traditional CSS) */
+
 .content-modal {
-  position: fixed; /* Stay in place */
-  z-index: 1030;  /* Sit on top of everything */
+  position: fixed;
+  z-index: 1030;
   padding-top: 60px;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  background-color: rgba(0,0,0,0.9);
 }
 
 .modal-content {
@@ -98,5 +110,16 @@ h1 {
 img {
   height: 33vh;
   box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.3);
-  // object-fit: contain;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+}
+
+body {
+  background-color: #141414;
+}
+
+h3 {
+  text-align: center;
 }
