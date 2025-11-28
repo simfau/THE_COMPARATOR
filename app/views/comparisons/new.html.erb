@@ -5,43 +5,140 @@
     data: {turbo_method: :delete} %>
 </div>
 <% end %>
+
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
-
       <div class="card shadow p-4">
         <h3 class="text-center mb-4">New Comparison</h3>
+<%= simple_form_for @comparison, url: comparisons_path, method: :post do |f| %>
+  <!-- Movie search -->
+  <div class="mb-3 position-relative">
+    <%= f.input :content_a_id, as: :hidden %>
+    <%= text_field_tag :movie_query,
+      params[:movie_query],
+      placeholder: "Search for a movie...",
+      class: "form-control",
+      data: { action: "keyup->comparison#searchMovie" } %>
+    <div id="movie-results" class="position-absolute w-100 bg-white border rounded mt-1 d-none" style="z-index: 1000;"></div>
+  </div>
 
-        <%= simple_form_for @comparison do |f| %>
+  <!-- Song search -->
+  <div class="mb-3 position-relative">
+    <%= f.input :content_b_id, as: :hidden %>
+    <%= text_field_tag :song_query,
+      params[:song_query],
+      placeholder: "Search for a song...",
+      class: "form-control",
+      data: { action: "keyup->comparison#searchSong" } %>
+    <div id="song-results" class="position-absolute w-100 bg-white border rounded mt-1 d-none" style="z-index: 1000;"></div>
+  </div>
 
-          <div class="mb-3">
-            <%= f.input :content_a,
-              as: :select,
-              label: false,
-              collection: Content.all.where(format: :movie),
-              include_blank: "Choose first item",
-              input_html: { class: "form-select" }
-            %>
-          </div>
-
-          <div class="mb-3">
-            <%= f.input :content_b,
-              as: :select,
-              label: false,
-              collection: Content.all.where(format: :song),
-              include_blank: "Choose second item",
-              input_html: { class: "form-select" }
-            %>
-          </div>
-
-          <div class="text-center mt-4">
-            <%= f.submit "Compare", class: "btn btn-primary btn-lg" %>
-          </div>
-
-        <% end %>
-
+  <!-- Submit button -->
+  <%= f.button :submit, "Create Comparison",
+    class: "btn btn-primary mt-3",
+    disabled: true,
+    id: "submit-button" %>
+<% end %>
 
       </div>
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener("turbo:load", function() {
+  const movieInput = document.querySelector("#movie_query");
+  const songInput = document.querySelector("#song_query");
+  const movieResults = document.querySelector("#movie-results");
+  const songResults = document.querySelector("#song-results");
+  const submitButton = document.querySelector("#submit-button");
+  const contentAInput = document.querySelector("#comparison_content_a_id");
+  const contentBInput = document.querySelector("#comparison_content_b_id");
+
+  // Enable/disable submit button based on selections
+  function updateSubmitButton() {
+    if (submitButton) {
+      submitButton.disabled = !(contentAInput.value && contentBInput.value);
+    }
+  }
+
+  // Movie search
+  if (movieInput) {
+    movieInput.addEventListener("keyup", function(e) {
+      if (e.target.value.length >= 2) {
+        fetch(`<%= search_contents_path %>?movie_query=${encodeURIComponent(e.target.value)}&content_type=movie`)
+          .then(response => response.json())
+          .then(data => {
+            if (movieResults) {
+              movieResults.innerHTML = data.results?.slice(0, 5).map(movie =>
+                `<div class="p-2 border-bottom" data-id="${movie.id}" data-title="${movie.title} (${movie.release_date?.slice(0, 4)})">
+                   ${movie.title} (${movie.release_date?.slice(0, 4)})
+                 </div>`
+              ).join("");
+              movieResults.classList.remove("d-none");
+            }
+          });
+      } else if (movieResults) {
+        movieResults.classList.add("d-none");
+      }
+    });
+  }
+
+  // Song search
+  if (songInput) {
+    songInput.addEventListener("keyup", function(e) {
+      if (e.target.value.length >= 2) {
+        fetch(`<%= search_contents_path %>?song_query=${encodeURIComponent(e.target.value)}&content_type=song`)
+          .then(response => response.json())
+          .then(data => {
+            if (songResults) {
+              songResults.innerHTML = data.tracks?.items?.slice(0, 5).map(song =>
+                `<div class="p-2 border-bottom" data-id="${song.id}" data-title="${song.name} (${song.album.release_date?.slice(0, 4)})">
+                   ${song.name} (${song.album.release_date?.slice(0, 4)})
+                 </div>`
+              ).join("");
+              songResults.classList.remove("d-none");
+            }
+          });
+      } else if (songResults) {
+        songResults.classList.add("d-none");
+      }
+    });
+  }
+
+  // Select movie
+  if (movieResults) {
+    movieResults.addEventListener("click", function(e) {
+      if (e.target.dataset.id) {
+        contentAInput.value = e.target.dataset.id;
+        movieInput.value = e.target.dataset.title;
+        movieResults.classList.add("d-none");
+        updateSubmitButton();
+      }
+    });
+  }
+
+  // Select song
+  if (songResults) {
+    songResults.addEventListener("click", function(e) {
+      if (e.target.dataset.id) {
+        contentBInput.value = e.target.dataset.id;
+        songInput.value = e.target.dataset.title;
+        songResults.classList.add("d-none");
+        updateSubmitButton();
+      }
+    });
+  }
+
+  // Hide results when clicking outside
+  document.addEventListener("click", function(e) {
+    if (movieInput && !movieInput.contains(e.target) && movieResults && !movieResults.contains(e.target)) {
+      movieResults.classList.add("d-none");
+    }
+    if (songInput && !songInput.contains(e.target) && songResults && !songResults.contains(e.target)) {
+      songResults.classList.add("d-none");
+    }
+  });
+});
+</script>

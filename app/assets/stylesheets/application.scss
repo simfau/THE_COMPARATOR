@@ -11,3 +11,11 @@
 @import "components/index";
 @import "pages/index";
 @import "pages/show";
+
+@import 'simple_form_autocomplete';
+
+#movie-results div:hover,
+#song-results div:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}

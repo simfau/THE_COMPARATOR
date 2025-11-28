@@ -14,7 +14,9 @@ require 'rspotify'
 Content.destroy_all
 User.destroy_all
 Comparison.destroy_all
+
 Tmdb::Api.key(ENV["TMDB_API_KEY"])
+RSpotify::authenticate(ENV["SPOTIFY_KEY"], ENV["SPOTIFY_SECRET"])
 
 5.times do
   faker_movie = Faker::Movie.title
@@ -24,22 +26,19 @@ Tmdb::Api.key(ENV["TMDB_API_KEY"])
   Content.create!({format: :movie, title: movie.title, description: movie.overview, image_url: img, year: released})
 end
 
-RSpotify::authenticate(ENV["SPOTIFY_KEY"], ENV["SPOTIFY_SECRET"])
 
 5.times do
   faker_song = Faker::Music::Prince.song
   song = RSpotify::Track.search(faker_song)[0]
-  artist = RSpotify::Track.search('kiss')[0].album.artists[0].name
+  artist = RSpotify::Track.search(faker_song)[0].album.artists[0].name
   img = song.album.images[0]["url"]
-  released = RSpotify::Track.search('kiss')[0].album.release_date.first(4)
+  released = RSpotify::Track.search(faker_song)[0].album.release_date.first(4)
   Content.create!({format: :song,  title: song.name, description: Faker::Lorem.sentence(word_count: 40), image_url: img, creator: artist, year: released})
 end
 
-User.create!(
+1.times do |i|
+  User.create!(
     email: "test@gmail.com",
     password: "123456"
   )
-
-2.times do
-  Comparison.create!({content_a: Content.all.to_a.sample, content_b: Content.all.to_a.sample, user: User.all.to_a.sample, ai_result: Faker::Lorem.sentence(word_count: 30)})
 end
