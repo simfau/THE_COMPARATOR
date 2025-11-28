@@ -98,7 +98,7 @@ document.addEventListener("turbo:load", function() {
             if (songResults) {
               songResults.innerHTML = data.tracks?.items?.slice(0, 5).map(song =>
                 `<div class="p-2 border-bottom" data-id="${song.id}" data-title="${song.name} (${song.album.release_date?.slice(0, 4)})">
-                   ${song.name} (${song.album.release_date?.slice(0, 4)})
+                   ${song.name} (${song.album.release_date?.slice(0, 4)}, ${song.album.artists[0].name})
                  </div>`
               ).join("");
               songResults.classList.remove("d-none");
