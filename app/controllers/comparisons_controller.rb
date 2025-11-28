@@ -8,14 +8,10 @@ class ComparisonsController < ApplicationController
 
 
   def new
-    @comparison = Comparison.new(
-      content_a_id: params[:content_a_id],
-      content_b_id: params[:content_b_id]
-    )
+    @comparison = Comparison.new
     @content_a_results = []
     @content_b_results = []
   end
-
 def create
   Tmdb::Api.key(ENV["TMDB_API_KEY"])
   RSpotify::authenticate(ENV["SPOTIFY_KEY"], ENV["SPOTIFY_SECRET"])
@@ -91,10 +87,22 @@ def search_contents
     )
     render json: JSON.parse(response.body)
   elsif params[:song_query].present? && params[:song_query].length >= 2
+    response = Faraday.post(
+      "https://accounts.spotify.com/api/token",
+      {
+        grant_type: "client_credentials",
+        client_id: ENV["SPOTIFY_KEY"],
+        client_secret: ENV["SPOTIFY_SECRET"]
+      },
+      { 'Content-Type' => "application/x-www-form-urlencoded", "Accept" => "application/json" }
+    )
+
+    access_token = JSON.parse(response.body)["access_token"]
+
     encoded_query = URI.encode_www_form_component(params[:song_query])
     response = Faraday.get(
       "https://api.spotify.com/v1/search?q=#{encoded_query}&type=track&market=US&limit=5",
-      {}, { 'Authorization' => "Bearer #{ENV['SPOTIFY_BEARER']}", 'Accept' => 'application/json' }
+      {}, { 'Authorization' => "Bearer #{access_token}", 'Accept' => 'application/json' }
     )
     render json: JSON.parse(response.body)
   else

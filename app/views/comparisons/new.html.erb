@@ -47,7 +47,7 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("turbo:load", function() {
   const movieInput = document.querySelector("#movie_query");
   const songInput = document.querySelector("#song_query");
   const movieResults = document.querySelector("#movie-results");
@@ -58,71 +58,85 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Enable/disable submit button based on selections
   function updateSubmitButton() {
-    submitButton.disabled = !(contentAInput.value && contentBInput.value);
+    if (submitButton) {
+      submitButton.disabled = !(contentAInput.value && contentBInput.value);
+    }
   }
 
   // Movie search
-  movieInput.addEventListener("keyup", function(e) {
-    if (e.target.value.length >= 2) {
-      fetch(`<%= search_contents_path %>?movie_query=${encodeURIComponent(e.target.value)}&content_type=movie`)
-        .then(response => response.json())
-        .then(data => {
-          movieResults.innerHTML = data.results?.slice(0, 5).map(movie =>
-            `<div class="p-2 border-bottom" data-id="${movie.id}" data-title="${movie.title} (${movie.release_date?.slice(0, 4)})">
-               ${movie.title} (${movie.release_date?.slice(0, 4)})
-             </div>`
-          ).join("");
-          movieResults.classList.remove("d-none");
-        });
-    } else {
-      movieResults.classList.add("d-none");
-    }
-  });
+  if (movieInput) {
+    movieInput.addEventListener("keyup", function(e) {
+      if (e.target.value.length >= 2) {
+        fetch(`<%= search_contents_path %>?movie_query=${encodeURIComponent(e.target.value)}&content_type=movie`)
+          .then(response => response.json())
+          .then(data => {
+            if (movieResults) {
+              movieResults.innerHTML = data.results?.slice(0, 5).map(movie =>
+                `<div class="p-2 border-bottom" data-id="${movie.id}" data-title="${movie.title} (${movie.release_date?.slice(0, 4)})">
+                   ${movie.title} (${movie.release_date?.slice(0, 4)})
+                 </div>`
+              ).join("");
+              movieResults.classList.remove("d-none");
+            }
+          });
+      } else if (movieResults) {
+        movieResults.classList.add("d-none");
+      }
+    });
+  }
 
   // Song search
-  songInput.addEventListener("keyup", function(e) {
-    if (e.target.value.length >= 2) {
-      fetch(`<%= search_contents_path %>?song_query=${encodeURIComponent(e.target.value)}&content_type=song`)
-        .then(response => response.json())
-        .then(data => {
-          songResults.innerHTML = data.tracks?.items?.slice(0, 5).map(song =>
-            `<div class="p-2 border-bottom" data-id="${song.id}" data-title="${song.name} (${song.album.release_date?.slice(0, 4)})">
-               ${song.name} (${song.album.release_date?.slice(0, 4)})
-             </div>`
-          ).join("");
-          songResults.classList.remove("d-none");
-        });
-    } else {
-      songResults.classList.add("d-none");
-    }
-  });
+  if (songInput) {
+    songInput.addEventListener("keyup", function(e) {
+      if (e.target.value.length >= 2) {
+        fetch(`<%= search_contents_path %>?song_query=${encodeURIComponent(e.target.value)}&content_type=song`)
+          .then(response => response.json())
+          .then(data => {
+            if (songResults) {
+              songResults.innerHTML = data.tracks?.items?.slice(0, 5).map(song =>
+                `<div class="p-2 border-bottom" data-id="${song.id}" data-title="${song.name} (${song.album.release_date?.slice(0, 4)})">
+                   ${song.name} (${song.album.release_date?.slice(0, 4)})
+                 </div>`
+              ).join("");
+              songResults.classList.remove("d-none");
+            }
+          });
+      } else if (songResults) {
+        songResults.classList.add("d-none");
+      }
+    });
+  }
 
   // Select movie
-  movieResults.addEventListener("click", function(e) {
-    if (e.target.dataset.id) {
-      contentAInput.value = e.target.dataset.id;
-      movieInput.value = e.target.dataset.title;
-      movieResults.classList.add("d-none");
-      updateSubmitButton();
-    }
-  });
+  if (movieResults) {
+    movieResults.addEventListener("click", function(e) {
+      if (e.target.dataset.id) {
+        contentAInput.value = e.target.dataset.id;
+        movieInput.value = e.target.dataset.title;
+        movieResults.classList.add("d-none");
+        updateSubmitButton();
+      }
+    });
+  }
 
   // Select song
-  songResults.addEventListener("click", function(e) {
-    if (e.target.dataset.id) {
-      contentBInput.value = e.target.dataset.id;
-      songInput.value = e.target.dataset.title;
-      songResults.classList.add("d-none");
-      updateSubmitButton();
-    }
-  });
+  if (songResults) {
+    songResults.addEventListener("click", function(e) {
+      if (e.target.dataset.id) {
+        contentBInput.value = e.target.dataset.id;
+        songInput.value = e.target.dataset.title;
+        songResults.classList.add("d-none");
+        updateSubmitButton();
+      }
+    });
+  }
 
   // Hide results when clicking outside
   document.addEventListener("click", function(e) {
-    if (!movieInput.contains(e.target) && !movieResults.contains(e.target)) {
+    if (movieInput && !movieInput.contains(e.target) && movieResults && !movieResults.contains(e.target)) {
       movieResults.classList.add("d-none");
     }
-    if (!songInput.contains(e.target) && !songResults.contains(e.target)) {
+    if (songInput && !songInput.contains(e.target) && songResults && !songResults.contains(e.target)) {
       songResults.classList.add("d-none");
     }
   });
