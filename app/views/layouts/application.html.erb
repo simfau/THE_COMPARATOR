@@ -23,13 +23,17 @@
       <% end %>
         <div class="col-md my-4">
           <div class="d-flex gap-3">
+
             <%= link_to "#", class: "d-none nav-link text-light",
               data: {action: "click->toggle#call", toggle_target: "show"} do %>
               <i class="fa-regular fa-square-caret-right"></i>
             <% end %>
-            <%= link_to "#", class: "nav-link text-light", data: { action: "click->toggle#call" } do %>
+
+            <%= link_to "#", class: "nav-link text-light",
+              data: { action: "click->toggle#call", toggle_target: "hideable" } do %>
               <i class="fa-regular fa-square-caret-left"></i>
             <% end %>
+
           </div>
           <%= yield %>
         </div>
