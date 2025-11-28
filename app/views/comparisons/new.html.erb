@@ -14,23 +14,76 @@ RSpotify::authenticate(ENV["SPOTIFY_KEY"], ENV["SPOTIFY_SECRET"]) %>
       <div class="card shadow p-4">
         <h3 class="text-center mb-4">New Comparison</h3>
 
-        <%= simple_form_for @comparison do |f| %>
+        <div id="container">
+          <label for="search">Search movie</label>
+          <input type="text" id="search_a" placeholder="Search...">
+          <ul id="results_a">
+          </ul>
+        </div>
 
-          <div class="mb-3">
-            <%= f.input :content_a, as: :autocomplete, source: Tmdb::Movie.find('the godfather') %>
-          </div>
-
-          <div class="mb-3">
-            <%=  f.input :content_b, as: :autocomplete, source: RSpotify::Track.search('kiss')
-            %>
-          </div>
-
-          <div class="text-center mt-4">
-            <%= f.submit "Compare", class: "btn btn-primary btn-lg" %>
-          </div>
-
-        <% end %>
+        <div id="container">
+          <label for="search">Search song</label>
+          <input type="text" id="search_b" placeholder="Search...">
+          <ul id="results_b">
+          </ul>
+        </div>
       </div>
     </div>
   </div>
+  <script>
+const user_input_a = document.querySelector('#search_a');
+const answers_a = document.querySelector('#results_a');
+const user_input_b = document.querySelector('#search_b');
+const answers_b = document.querySelector('#results_b');
+// import TMDB from '@blacktiger/tmdb';
+
+// const tmdb = new TMDB('<%= ENV["TMDB_API_KEY"] %>');
+
+const drawResponseListA = (data) => {
+  answers_a.innerHTML = '';
+  answers_b.innerHTML = '';
+  data.results.slice(0, 4).forEach((result) => {
+    answers_a.insertAdjacentHTML('beforeend', `<li>${result.title}, ${result.release_date.slice(0, 4)}</li>`);
+  });
+};
+
+const drawResponseListB = (data) => {
+  answers_b.innerHTML = '';
+  answers_a.innerHTML = '';
+  data.tracks.items.forEach((track) => {
+    answers_b.insertAdjacentHTML('beforeend', `<li>${track.name}, ${track.album.release_date.slice(0, 4)}</li>`);
+  });
+};
+
+const autocompleteA = (e) => {
+  const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(e.target.value)}&include_adult=false&language=en-US&page=1`;
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer <%= ENV['TMDB_BEARER']%>'
+    }
+  };
+  fetch(url, options)
+  .then(response => response.json())
+  .then(data => drawResponseListA(data));
+};
+
+const autocompleteB = (e) => {
+  const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(e.target.value)}&type=track&market=US&limit=5`;
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer <%= ENV['SPOTIFY_BEARER']%>'
+    }
+  };
+  fetch(url, options)
+  .then(response => response.json())
+  .then(data => drawResponseListB(data));
+};
+
+user_input_a.addEventListener('keyup', autocompleteA);
+user_input_b.addEventListener('keyup', autocompleteB);
+</script>
 </div>

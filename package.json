@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@blacktiger/tmdb": "^0.22.0"
+  }
+}
