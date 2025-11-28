@@ -1,0 +1,10 @@
+.sidebar {
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(0);
+  position: relative;
+  z-index: 1000;
+}
+
+.sidebar--hidden {
+  transform: translateX(-100%);
+}

@@ -35,13 +35,10 @@ RSpotify::authenticate(ENV["SPOTIFY_KEY"], ENV["SPOTIFY_SECRET"])
   Content.create!({format: :song,  title: song.name, description: Faker::Lorem.sentence(word_count: 40), image_url: img, creator: artist, year: released})
 end
 
-2.times do |i|
-  User.create!(
-    email: "simfaucher@outlook.com#{i.to_s}",
+User.create!(
+    email: "test@gmail.com",
     password: "123456"
   )
-  i += 1
-end
 
 2.times do
   Comparison.create!({content_a: Content.all.to_a.sample, content_b: Content.all.to_a.sample, user: User.all.to_a.sample, ai_result: Faker::Lorem.sentence(word_count: 30)})

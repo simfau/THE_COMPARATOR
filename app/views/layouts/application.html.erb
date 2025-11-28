@@ -17,11 +17,11 @@
     <div class="container-fluid">
       <div class="row" data-controller="toggle">
        <% if user_signed_in? %>
-      <nav id="sidebar" class="col-md-2 sidebar pt-3 bg-light" data-toggle-target="hideable"><h3>Recent Results</h3>
+      <nav id="sidebar" class="col-md-2 sidebar sidebar--hidden pt-3 bg-light" data-toggle-target="hideable"><h3>Recent Results</h3>
         <%= render "shared/sidebar", comparisons: @recent_comparisons %>
       </nav>
       <% end %>
-        <div class="col-md-10 my-4">
+        <div class="col-md my-4">
           <div class="d-flex gap-3">
             <%= link_to "#", class: "d-none nav-link text-light",
               data: {action: "click->toggle#call", toggle_target: "show"} do %>
