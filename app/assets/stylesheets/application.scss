@@ -31,3 +31,11 @@
  background-color: rgb(202, 202, 202);
  border-radius: 10px;
 }
+.card {
+  border-radius: 10px;
+  color: #ccc;
+  background-color: $tcgrey;
+}
+.offcanvas {
+  background-color: $tcwhite;
+}
