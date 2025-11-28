@@ -57,7 +57,7 @@ def create
   end
 
   if @comparison.save
-    redirect_to comparison_path(@comparison), notice: "Comparison created successfully!"
+    redirect_to comparison_path(@comparison)
   else
     Rails.logger.error "Failed to save comparison: #{@comparison.errors.full_messages}"
     render :new, status: :unprocessable_entity
@@ -72,7 +72,7 @@ end
   def destroy
     @comparison = Comparison.find(params[:id])
     @comparison.destroy
-    redirect_to root_path, notice: "Comparison deleted successfully!"
+    redirect_to root_path
   end
 
 def search_contents
