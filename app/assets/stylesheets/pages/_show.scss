@@ -1,13 +1,18 @@
-#image-box {
-  border-radius: 1px;
-  margin-bottom: 100px;
-  padding-bottom: 10px;
-  width: 50px;
+.img-box {
+  border-radius: 10px;
+  // margin-bottom: 100px;
+  // padding-bottom: 10px;
+  // // width: 50px;
 }
 
 #sidebar {
   margin-top: 24px;
   margin-bottom: 24px;
+  border-radius: 10px;
+}
+
+.card {
+  border-radius: 10px;
 }
 
 #result {
