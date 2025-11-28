@@ -82,3 +82,5 @@ gem 'rspotify'
 gem "kramdown"
 gem "rouge"
 gem "kramdown-parser-gfm"
+
+gem 'simple_form_autocomplete'
