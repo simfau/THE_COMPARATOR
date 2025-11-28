@@ -2,25 +2,35 @@
 
 
   <div class="row m-3 left-container">
-    <div class="col-5">
-      <div class="container px-4 py-4 bg-light border rounded">
+    <div class="col-4" data-controller="modal">
+      <div class="img-box container bg-light border mb-5">
 
         <h3><%= @comparison.content_a.title %></h3>
         <%= image_tag @comparison.content_a.image_url,
         alt: @comparison.content_a.title,
-        data: {bs_toggle: "modal", bs_target: "#imageModalB"}
-        %>
+        data: { 'large-src': @comparison.content_a.image_url, action: 'click->modal#show' },
+        class: 'clickable-thumbnail' %>
+
       </div>
 
-      <div class="container px-4 py-4 bg-light border rounded">
+      <div class="img-box container bg-light border">
         <h3><%= @comparison.content_b.title %></h3>
         <%= image_tag @comparison.content_b.image_url,
         alt: @comparison.content_b.title,
-        data: {bs_toggle: "modal", bs_target: "#imageModalB"}
-        %>
-
+        data: { 'large-src': @comparison.content_b.image_url, action: 'click->modal#show' },
+        class: 'clickable-thumbnail' %>
       </div>
+
+      <div id="myModal" class="content-modal hidden"
+        data-modal-target="modal"
+        data-action="click->modal#hide"> <span class="close" data-action="click->modal#hide">&times;</span>
+        <img class="modal-content" data-modal-target="image">
+        <div id="caption" data-modal-target="caption"></div>
+      </div>
+
     </div>
+
+
     <div class="col-7">
       <div class="right-div">
         <h1>Result</h1>
@@ -31,6 +41,6 @@
   </div>
 
   <div id="button" class="text-center mt-4">
-    <%= link_to "New Search", root_path, class: "btn btn-primary btn-lg" %>
+    <%= link_to "New Search", root_path, class: "btn btn-secondary btn-lg" %>
   </div>
 </div>
