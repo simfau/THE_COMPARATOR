@@ -6,22 +6,22 @@
 </div>
 <% end %>
 
-<div class="container mt-5">
+<div class="new-container container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card shadow p-4">
         <h3 class="text-center mb-4">New Comparison</h3>
-<%= simple_form_for @comparison, url: comparisons_path, method: :post do |f| %>
-  <!-- Movie search -->
-  <div class="mb-3 position-relative">
-    <%= f.input :content_a_id, as: :hidden %>
-    <%= text_field_tag :movie_query,
-      params[:movie_query],
-      placeholder: "Search for a movie...",
-      class: "form-control",
-      data: { action: "keyup->comparison#searchMovie" } %>
-    <div id="movie-results" class="position-absolute w-100 bg-white border rounded mt-1 d-none" style="z-index: 1000;"></div>
-  </div>
+          <%= simple_form_for @comparison, url: comparisons_path, method: :post do |f| %>
+          <!-- Movie search -->
+          <div class="mb-3 position-relative">
+          <%= f.input :content_a_id, as: :hidden %>
+          <%= text_field_tag :movie_query,
+          params[:movie_query],
+          placeholder: "Search for a movie...",
+          class: "form-control",
+          data: { action: "keyup->comparison#searchMovie" } %>
+            <div id="movie-results" class="position-absolute w-100 bg-white border rounded mt-1 d-none" style="z-index: 1000;"></div>
+    </div>
 
   <!-- Song search -->
   <div class="mb-3 position-relative">
@@ -35,11 +35,14 @@
   </div>
 
   <!-- Submit button -->
-  <%= f.button :submit, "Create Comparison",
-    class: "btn btn-primary mt-3",
-    disabled: true,
-    id: "submit-button" %>
-<% end %>
+  <span>
+    <%= f.button :submit, "Compare",
+      class: "submit btn btn-outline-secondary text-white mt-3",
+      disabled: true,
+      id: "submit-button" %>
+    <% end %>
+  </span>
+
 
       </div>
     </div>
