@@ -11,7 +11,7 @@
     <div class="col-4" data-controller="modal">
       <div class="img-box container bg-light border mb-5">
 
-        <h3><%= @comparison.content_a.title %></h3>
+        <h3><%= @comparison.content_a.title %>, (<%= @comparison.content_a.year %>)</h3>
         <%= image_tag @comparison.content_a.image_url,
         alt: @comparison.content_a.title,
         data: { 'large-src': @comparison.content_a.image_url, action: 'click->modal#show' },
@@ -20,7 +20,7 @@
       </div>
 
       <div class="img-box container bg-light border">
-        <h3><%= @comparison.content_b.title %></h3>
+        <h3><%= @comparison.content_b.title %>, <%= @comparison.content_b.creator %></h3>
         <%= image_tag @comparison.content_b.image_url,
         alt: @comparison.content_b.title,
         data: { 'large-src': @comparison.content_b.image_url, action: 'click->modal#show' },
@@ -39,7 +39,6 @@
 
     <div class="col-7">
       <div class="right-div">
-        <h1>Result</h1>
         <% result = @comparison.ai_result.to_s %>
         <%= raw(render_markdown(result)) %>
       </div>
