@@ -14,25 +14,25 @@
   </head>
 
   <body>
+     <%= render "shared/offcanvas", comparisons: @recent_comparisons %>
     <div class="container-fluid">
-      <div class="row" data-controller="toggle">
-       <% if user_signed_in? %>
-      <nav id="sidebar" class="col-md-2 sidebar pt-3 bg-light" data-toggle-target="hideable"><h3>Recent Results</h3>
-        <%= render "shared/sidebar", comparisons: @recent_comparisons %>
-      </nav>
-      <% end %>
-        <div class="col-md my-4">
-          <div class="d-flex gap-3">
-            <%= link_to "#", class: "d-none nav-link text-light",
-              data: {action: "click->toggle#call", toggle_target: "show"} do %>
-              <i class="fa-solid fa-angle-right" ></i>
-            <% end %>
-            <%= link_to "#", class: "nav-link text-light", data: { action: "click->toggle#call", toggle_target:"hideable"} do %>
-              <i class="fa-solid fa-angle-left"></i>
-            <% end %>
-          </div>
-          <%= yield %>
+
+      <div class="col-md my-4">
+        <div class="d-flex gap-3">
+          <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+            <i class="fa-solid fa-angle-right" ></i>
+          </a>
+          <!--
+          <%= link_to "#", class: "d-none nav-link text-light",
+            data: {action: "click->toggle#call", toggle_target: "show"} do %>
+            <i class="fa-solid fa-angle-right" ></i>
+          <% end %>
+          <%= link_to "#", class: "nav-link text-light", data: { action: "click->toggle#call", toggle_target:"hideable"} do %>
+            <i class="fa-solid fa-angle-left"></i>
+          <% end %>
+          -->
         </div>
+        <%= yield %>
       </div>
     </div>
   </body>
