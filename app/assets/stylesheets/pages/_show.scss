@@ -19,8 +19,16 @@
   display: none;
 }
 
+
+.submit {
+  align-items: center;
+  justify-content: center;
+}
+
 .card {
   border-radius: 10px;
+  color: #ccc;
+  background-color: #333333;
 }
 
 #result {
@@ -130,7 +138,7 @@ img {
 }
 
 body {
-  background-color: #141414;
+  background-color: #1f1f1f;
 }
 
 h3 {
