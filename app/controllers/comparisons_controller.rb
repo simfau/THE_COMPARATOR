@@ -32,18 +32,15 @@ def create
   end
 
   # Fetch or create content_b (song)
-  content_b = Content.find_by(id: comparison_params[:content_b_id])
-  unless content_b
     song_data = RSpotify::Track.find(comparison_params[:content_b_id])
     content_b = Content.create!(
       format: :song,
       title: song_data.name,
-      description: Faker::Lorem.sentence(word_count: 40),  # Or use song_data description if available
+      description: Faker::Lorem.sentence(word_count: 40),  #should have more info about the song as a string
       image_url: song_data.album.images.first["url"],
       creator: song_data.album.artists.first.name,
       year: song_data.album.release_date&.first(4),
     )
-  end
 
   # Update the comparison with the content IDs
   @comparison.content_a_id = content_a.id
@@ -114,6 +111,6 @@ end
   private
 
   def comparison_params
-    params.require(:comparison).permit(:content_a_id, :content_b_id)
+    params.require(:comparison).permit(:content_a_id, :song_query, :content_b_id)
   end
 end
