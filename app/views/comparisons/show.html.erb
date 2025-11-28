@@ -1,6 +1,12 @@
+<% if user_signed_in? %>
+<div class="d-flex justify-content-end mb-3">
+  <%= link_to "Log out", destroy_user_session_path,
+    class: "btn btn-outline-secondary btn-lg px-4 py-2 shadow text-decoration-none",
+    data: {turbo_method: :delete} %>
+</div>
+<% end %>
+
 <div class="layout-wrapper">
-
-
   <div class="row m-3 left-container">
     <div class="col-4" data-controller="modal">
       <div class="img-box container bg-light border mb-5">
@@ -41,6 +47,6 @@
   </div>
 
   <div id="button" class="text-center mt-4">
-    <%= link_to "New Search", root_path, class: "btn btn-secondary btn-lg" %>
+    <%= link_to "New Search", root_path, class: "btn btn-outline-secondary btn-lg" %>
   </div>
 </div>
